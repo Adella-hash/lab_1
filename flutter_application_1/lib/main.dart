@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,81 +8,78 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
+      home: Scaffold(
         appBar: AppBar(
-          title: Text("Flutter App"),
-          bottom: TabBar(
-            tabs: [
-              Tab(text: "List View"),
-              Tab(text: "Grid View"),
-            ],
+          title: Text(
+            "Lab 3: Layout Basics",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          backgroundColor: Colors.teal,
         ),
-        drawer: Drawer(
-          child: ListView(
+        backgroundColor: Colors.grey[300],
+        body: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
             children: [
-              DrawerHeader(
-                decoration: BoxDecoration(color: Colors.blue),
-                child: Text("Menu", style: TextStyle(color: Colors.white, fontSize: 24)),
+              Container(
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      offset: Offset(2, 2),
+                      blurRadius: 6,
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: Text(
+                    "Welcome to Flutter!",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ),
-              ListTile(title: Text("Home"), onTap: () {}),
-              ListTile(title: Text("Profile"), onTap: () {}),
-              ListTile(title: Text("Settings"), onTap: () {}),
-              ListTile(title: Text("Logout"), onTap: () {}),
+              SizedBox(height: 16),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.white, width: 2),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Left Text",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                    ),
+                    Text(
+                      "Right Text",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
-        ),
-        body: TabBarView(
-          children: [
-            // ListView
-            ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text("Item ${index + 1}"),
-                  subtitle: Text("Subtitle ${index + 1}"),
-                );
-              },
-            ),
-            // GridView
-            GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-              itemCount: 6,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: EdgeInsets.all(8),
-                  color: Colors.primaries[index % Colors.primaries.length],
-                  child: Center(
-                    child: Text(
-                      "${index + 1}",
-                      style: TextStyle(fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Fluttertoast.showToast(
-              msg: "Hello, Flutter!",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-            );
-          },
-          child: Icon(Icons.message),
         ),
       ),
     );
